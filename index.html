@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Registration Form</h1>
+        
+        <form id="registrationForm">
+            <!-- Personal Information -->
+            <div class="form-section">
+                <h2 class="section-title">Personal Information</h2>
+                
+                <div class="form-group">
+                    <label for="name">Name <span class="required">*</span></label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="dob">Date of Birth <span class="required">*</span></label>
+                        <input type="date" id="dob" name="dob" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Gender <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="male" name="gender" value="male" required>
+                                <label for="male">Male</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="female" name="gender" value="female">
+                                <label for="female">Female</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="other" name="gender" value="other">
+                                <label for="other">Other</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contact Details -->
+            <div class="form-section">
+                <h2 class="section-title">Contact Details</h2>
+                
+                <div class="form-group">
+                    <label for="address1">Address Line 1 <span class="required">*</span></label>
+                    <input type="text" id="address1" name="address1" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address2">Address Line 2</label>
+                    <input type="text" id="address2" name="address2">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="state">State <span class="required">*</span></label>
+                        <select id="state" name="state" required>
+                            <option value="">-- Select State --</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="city">City <span class="required">*</span></label>
+                        <select id="city" name="city" disabled required>
+                            <option value="">-- Select State First --</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="postalCode">Postal Code <span class="required">*</span></label>
+                        <input type="text" id="postalCode" name="postalCode" pattern="[0-9]{6}" maxlength="6" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Cities</label>
+                    <input type="text" class="search-box" id="citySearch" placeholder="Search cities..." style="display: none;">
+                    <div id="cities" class="checkbox-container disabled">
+                        <p style="color: #888; text-align: center;">Select a state first</p>
+                    </div>
+                    <div class="selected-tags" id="selectedCitiesTags"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Areas</label>
+                    <input type="text" class="search-box" id="areaSearch" placeholder="Search areas..." style="display: none;">
+                    <div id="areas" class="checkbox-container disabled">
+                        <p style="color: #888; text-align: center;">Select cities first</p>
+                    </div>
+                    <div class="selected-tags" id="selectedAreasTags"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Pin Codes</label>
+                    <input type="text" class="search-box" id="pinSearch" placeholder="Search pin codes..." style="display: none;">
+                    <div id="pinCodes" class="checkbox-container disabled">
+                        <p style="color: #888; text-align: center;">Select a state first</p>
+                    </div>
+                    <div class="selected-tags" id="selectedPinTags"></div>
+                </div>
+            </div>
+            
+            <!-- Languages & Additional Info -->
+            <div class="form-section">
+                <h2 class="section-title">Languages & Additional Information</h2>
+                
+                <div class="form-group">
+                    <label>Languages Known</label>
+                    <input type="text" class="search-box" id="languageSearch" placeholder="Search languages...">
+                    <div id="languages" class="checkbox-container">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                    <div class="selected-tags" id="selectedLanguagesTags"></div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="status">Status <span class="required">*</span></label>
+                        <select id="status" name="status" required>
+                            <option value="">-- Select Status --</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                            <option value="suspended">Suspended</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="onboardingDate">Onboarding Date <span class="required">*</span></label>
+                        <input type="date" id="onboardingDate" name="onboardingDate" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="type">Type <span class="required">*</span></label>
+                    <select id="type" name="type" required>
+                        <option value="">-- Select Type --</option>
+                        <option value="individual">Individual</option>
+                        <option value="agency">Agency</option>
+                        <option value="subagency">Sub-agency</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button type="submit" class="submit-btn">Submit Registration</button>
+        </form>
+        
+        <div class="data-source" id="dataSource">✓ Data loaded from external sources</div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
