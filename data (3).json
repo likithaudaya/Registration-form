@@ -1,0 +1,30 @@
+[
+  {
+    "Name": "Likitha",
+    "Date of Birth": "2005-03-14",
+    "Gender": "female",
+    "Address Line 1": "Lakshmi devi nagara",
+    "Address Line 2": "Laggere",
+    "State": "Karnataka",
+    "City": "Bangalore",
+    "Postal Code": "560096",
+    "Cities": [
+      "Bangalore"
+    ],
+    "Areas": [
+      "Bangalore North"
+    ],
+    "Pin Codes": [
+      "110001"
+    ],
+    "Languages Known": [
+      "English",
+      "Hindi",
+      "Kannada"
+    ],
+    "Status": "active",
+    "Onboarding Date": "2025-12-15",
+    "Type": "individual",
+    "Created Date": "2025-12-25T19:09:54.151Z"
+  }
+]
