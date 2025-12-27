@@ -55,6 +55,7 @@ h1 {
 
 .form-group {
     margin-bottom: 20px;
+    position: relative;
 }
 
 .form-group.full-width {
@@ -95,6 +96,20 @@ select:focus {
     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
+input[type="text"].error,
+input[type="date"].error,
+select.error {
+    border-color: #f5576c;
+    background-color: #fff5f5;
+}
+
+input[type="text"].success,
+input[type="date"].success,
+select.success {
+    border-color: #e0e0e0;
+    background-color: white;
+}
+
 input:disabled,
 select:disabled {
     background-color: #f0f0f0;
@@ -106,6 +121,13 @@ select:disabled {
     display: flex;
     gap: 20px;
     align-items: center;
+}
+
+.radio-group.error {
+    border: 2px solid #f5576c;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #fff5f5;
 }
 
 .radio-option {
@@ -220,12 +242,46 @@ select:disabled {
     box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
 }
 
+.submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
 .data-source {
     text-align: center;
     font-size: 12px;
     color: #888;
     margin-top: 20px;
     font-style: italic;
+}
+
+/* Error Message Styles */
+.error-message {
+    display: block;
+    color: #f5576c;
+    font-size: 12px;
+    margin-top: 5px;
+    min-height: 18px;
+    font-weight: 500;
+}
+
+.error-message:empty {
+    display: none;
+}
+
+/* Success Icon */
+.form-group.valid input[type="text"],
+.form-group.valid input[type="date"],
+.form-group.valid select {
+    border-color: #e0e0e0;
+    background-color: white;
+}
+
+.form-group.invalid input[type="text"],
+.form-group.invalid input[type="date"],
+.form-group.invalid select {
+    border-color: #f5576c;
 }
 
 @media (max-width: 768px) {

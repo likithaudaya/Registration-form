@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Registration Management</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <button class="menu-toggle" id="menuToggle">☰</button>
+            <h1 class="logo">Registration Dashboard</h1>
+        </div>
+        <div class="header-right">
+            <div class="search-bar">
+                <input type="text" id="globalSearch" placeholder="Search pages...">
+                <button id="searchBtn">🔍</button>
+            </div>
+            <div class="admin-profile">
+                <img src="https://via.placeholder.com/40" alt="Admin">
+                <span>Admin</span>
+                <button class="logout-btn" id="logoutBtn">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <nav class="nav-menu">
+                <a href="#overview" class="nav-item active" data-section="overview">
+                    <span class="icon">📊</span>
+                    <span>Overview</span>
+                </a>
+                <a href="#registrations" class="nav-item" data-section="registrations">
+                    <span class="icon">👥</span>
+                    <span>Registrations</span>
+                </a>
+                <a href="#analytics" class="nav-item" data-section="analytics">
+                    <span class="icon">📈</span>
+                    <span>Analytics</span>
+                </a>
+                <a href="#reports" class="nav-item" data-section="reports">
+                    <span class="icon">📄</span>
+                    <span>Reports</span>
+                </a>
+                <a href="#users" class="nav-item" data-section="users">
+                    <span class="icon">👤</span>
+                    <span>User Management</span>
+                </a>
+                <a href="#settings" class="nav-item" data-section="settings">
+                    <span class="icon">⚙️</span>
+                    <span>Settings</span>
+                </a>
+                <a href="#logs" class="nav-item" data-section="logs">
+                    <span class="icon">📋</span>
+                    <span>Activity Logs</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Overview Section -->
+            <section id="overview" class="content-section active">
+                <div class="section-header">
+                    <h2>Dashboard Overview</h2>
+                    <div class="date-time" id="currentDateTime"></div>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📊</div>
+                        <div class="stat-info">
+                            <h3 id="totalRegistrations">0</h3>
+                            <p>Total Registrations</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📅</div>
+                        <div class="stat-info">
+                            <h3 id="todayRegistrations">0</h3>
+                            <p>Today's Registrations</p>
+                        </div>
+                    </div>
+                    <div class="stat-card status-breakdown-card">
+                        <div class="stat-icon">📈</div>
+                        <div class="stat-info">
+                            <h3>User Status</h3>
+                            <div class="status-circles">
+                                <div class="status-item">
+                                    <div class="status-circle active-circle">
+                                        <span id="activeUsers">0</span>
+                                    </div>
+                                    <p>Active</p>
+                                </div>
+                                <div class="status-item">
+                                    <div class="status-circle inactive-circle">
+                                        <span id="inactiveUsers">0</span>
+                                    </div>
+                                    <p>Inactive</p>
+                                </div>
+                                <div class="status-item">
+                                    <div class="status-circle suspended-circle">
+                                        <span id="suspendedUsers">0</span>
+                                    </div>
+                                    <p>Suspended</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts -->
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <h3>Registration Trend (This Week vs Last Week)</h3>
+                        <canvas id="registrationTrendChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Recent Registrations -->
+                <div class="recent-section">
+                    <h3>Recent Registrations</h3>
+                    <div class="table-container">
+                        <table class="data-table" id="recentTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Age</th>
+                                    <th>Gender</th>
+                                    <th>State</th>
+                                    <th>Status</th>
+                                    <th>Created Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentTableBody">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Registrations Section -->
+            <section id="registrations" class="content-section">
+                <div class="section-header">
+                    <h2>All Registrations</h2>
+                    <button class="btn-primary" id="addNewBtn">+ New Registration</button>
+                </div>
+
+                <!-- Filters -->
+                <div class="filters-panel">
+                    <input type="text" id="searchName" placeholder="Search by name...">
+                    <select id="filterState">
+                        <option value="">All States</option>
+                    </select>
+                    <select id="filterGender">
+                        <option value="">All Genders</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <select id="filterStatus">
+                        <option value="">All Status</option>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                        <option value="suspended">Suspended</option>
+                    </select>
+                    <button class="btn-secondary" id="applyFilters">Apply Filters</button>
+                    <button class="btn-secondary" id="clearFilters">Clear</button>
+                </div>
+
+                <!-- Data Table -->
+                <div class="table-container">
+                    <table class="data-table" id="registrationsTable">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" id="selectAll"></th>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>DOB</th>
+                                <th>Age</th>
+                                <th>Gender</th>
+                                <th>State</th>
+                                <th>City</th>
+                                <th>Status</th>
+                                <th>Type</th>
+                                <th>Created</th>
+                            </tr>
+                        </thead>
+                        <tbody id="registrationsTableBody">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination" id="pagination">
+                    <button class="page-btn" id="prevPage">Previous</button>
+                    <span id="pageInfo">Page 1 of 1</span>
+                    <button class="page-btn" id="nextPage">Next</button>
+                </div>
+
+                <!-- Bulk Actions -->
+                <div class="bulk-actions">
+                    <button class="btn-danger" id="bulkDelete">Delete Selected</button>
+                    <button class="btn-secondary" id="bulkExport">Export Selected</button>
+                </div>
+            </section>
+
+            <!-- Analytics Section -->
+            <section id="analytics" class="content-section">
+                <div class="section-header">
+                    <h2>Analytics & Insights</h2>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <h3>State-wise Distribution</h3>
+                        <div class="chart-stats" id="stateStats"></div>
+                        <canvas id="stateChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Status Breakdown</h3>
+                        <div class="chart-stats" id="statusStats"></div>
+                        <canvas id="statusChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Type Distribution</h3>
+                        <div class="chart-stats" id="typeStats"></div>
+                        <canvas id="typeChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Age Distribution</h3>
+                        <div class="chart-stats" id="ageStats"></div>
+                        <canvas id="ageChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Additional Stats -->
+                <div class="analytics-stats">
+                    <div class="stat-box">
+                        <h4>Most Common State</h4>
+                        <p id="topState">-</p>
+                    </div>
+                    <div class="stat-box">
+                        <h4>Most Common Language</h4>
+                        <p id="topLanguage">-</p>
+                    </div>
+                    <div class="stat-box">
+                        <h4>Average Age</h4>
+                        <p id="avgAge">-</p>
+                    </div>
+                    <div class="stat-box">
+                        <h4>Total Cities</h4>
+                        <p id="totalCities">-</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Reports Section -->
+            <section id="reports" class="content-section">
+                <div class="section-header">
+                    <h2>Reports & Export</h2>
+                </div>
+
+                <div class="reports-grid">
+                    <div class="report-card">
+                        <h3>📊 Summary Report</h3>
+                        <p>Generate a comprehensive summary of all registrations</p>
+                        <div class="report-format">
+                            <label>
+                                <input type="radio" name="summaryFormat" value="pdf" checked> PDF
+                            </label>
+                            <label>
+                                <input type="radio" name="summaryFormat" value="word"> Word
+                            </label>
+                        </div>
+                        <button class="btn-primary" id="generateSummary">Generate</button>
+                    </div>
+                    <div class="report-card">
+                        <h3>📅 Date Range Report</h3>
+                        <input type="date" id="reportStartDate">
+                        <input type="date" id="reportEndDate">
+                        <button class="btn-primary" id="generateDateReport">Generate</button>
+                    </div>
+                    <div class="report-card">
+                        <h3>📥 Export Data</h3>
+                        <button class="btn-secondary" id="exportJSON">Export JSON</button>
+                        <button class="btn-secondary" id="exportCSV">Export CSV</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Users Section -->
+            <section id="users" class="content-section">
+                <div class="section-header">
+                    <h2>User Management</h2>
+                </div>
+                
+                <div class="user-management-grid">
+                    <div class="user-card">
+                        <h3>👤 User Profiles</h3>
+                        <p>View and manage individual user profiles</p>
+                        <button class="btn-primary" onclick="alert('Feature coming soon')">View Profiles</button>
+                    </div>
+                    <div class="user-card">
+                        <h3>✏️ Bulk Edit</h3>
+                        <p>Update multiple user records at once</p>
+                        <button class="btn-primary" onclick="alert('Feature coming soon')">Bulk Edit</button>
+                    </div>
+                    <div class="user-card">
+                        <h3>🔐 Permissions</h3>
+                        <p>Manage user roles and permissions</p>
+                        <button class="btn-primary" onclick="alert('Feature coming soon')">Manage Permissions</button>
+                    </div>
+                    <div class="user-card">
+                        <h3>📧 Send Notifications</h3>
+                        <p>Send emails or messages to users</p>
+                        <button class="btn-primary" onclick="alert('Feature coming soon')">Send Message</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings" class="content-section">
+                <div class="section-header">
+                    <h2>Settings</h2>
+                </div>
+                
+                <div class="settings-grid">
+                    <div class="settings-card">
+                        <h3>Profile Settings</h3>
+                        <form>
+                            <label>Admin Name</label>
+                            <input type="text" value="Admin" placeholder="Enter name">
+                            <label>Email</label>
+                            <input type="email" value="admin@example.com" placeholder="Enter email">
+                            <button type="submit" class="btn-primary">Save Changes</button>
+                        </form>
+                    </div>
+                    <div class="settings-card">
+                        <h3>Notifications</h3>
+                        <label><input type="checkbox" checked> Email notifications</label>
+                        <label><input type="checkbox"> SMS notifications</label>
+                        <label><input type="checkbox" checked> Daily summary</label>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Logs Section -->
+            <section id="logs" class="content-section">
+                <div class="section-header">
+                    <h2>Activity Logs</h2>
+                    <button class="btn-secondary" onclick="exportLogs()">Export Logs</button>
+                </div>
+                
+                <div class="logs-filter">
+                    <select id="logFilter">
+                        <option value="all">All Activities</option>
+                        <option value="create">User Created</option>
+                        <option value="update">User Updated</option>
+                        <option value="delete">User Deleted</option>
+                        <option value="export">Data Exported</option>
+                    </select>
+                    <input type="date" id="logStartDate" placeholder="Start Date">
+                    <input type="date" id="logEndDate" placeholder="End Date">
+                    <button class="btn-primary" onclick="filterLogs()">Filter</button>
+                </div>
+                
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Timestamp</th>
+                                <th>Action</th>
+                                <th>User</th>
+                                <th>Details</th>
+                                <th>IP Address</th>
+                            </tr>
+                        </thead>
+                        <tbody id="logsTableBody">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
