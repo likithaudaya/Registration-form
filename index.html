@@ -7,10 +7,58 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="form-container">
-        <h1>Registration Form</h1>
-        
-        <form id="registrationForm" novalidate>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <button class="menu-toggle" id="menuToggle">☰</button>
+            <h1 class="logo">Registration Management</h1>
+        </div>
+        <div class="header-right">
+            <div class="admin-profile">
+                <img src="https://via.placeholder.com/40" alt="Admin">
+                <span>Admin</span>
+                <button class="logout-btn" onclick="alert('Logout')">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <nav class="nav-menu">
+                <a href="dashboard.html" class="nav-item">
+                    <span class="icon">📊</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="index.html" class="nav-item active">
+                    <span class="icon">📝</span>
+                    <span>New Registration</span>
+                </a>
+                <a href="dashboard.html#registrations" class="nav-item">
+                    <span class="icon">👥</span>
+                    <span>View Registrations</span>
+                </a>
+                <a href="dashboard.html#analytics" class="nav-item">
+                    <span class="icon">📈</span>
+                    <span>Analytics</span>
+                </a>
+                <a href="dashboard.html#reports" class="nav-item">
+                    <span class="icon">📄</span>
+                    <span>Reports</span>
+                </a>
+                <a href="dashboard.html#settings" class="nav-item">
+                    <span class="icon">⚙️</span>
+                    <span>Settings</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="form-container">
+                <h1>Registration Form</h1>
+                
+                <form id="registrationForm" novalidate>
             <!-- Personal Information -->
             <div class="form-section">
                 <h2 class="section-title">Personal Information</h2>
@@ -167,6 +215,8 @@
         </form>
         
         <div class="data-source" id="dataSource">✓ Data loaded from external sources</div>
+    </div>
+        </main>
     </div>
 
     <script src="script.js"></script>

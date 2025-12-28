@@ -1,3 +1,14 @@
+// Check if user is logged in
+function checkAuth() {
+    const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+    if (isLoggedIn !== 'true') {
+        window.location.href = 'login.html';
+    }
+}
+
+// Call checkAuth on page load
+checkAuth();
+
 // Load registration data from localStorage
 let registrationData = [];
 
@@ -20,6 +31,21 @@ function calculateAge(dob) {
     }
     return age;
 }
+
+// Logout functionality
+document.getElementById('logoutBtn').addEventListener('click', function(e) {
+    e.preventDefault();
+    
+    if (confirm('Are you sure you want to logout?')) {
+        // Clear session
+        sessionStorage.removeItem('isLoggedIn');
+        sessionStorage.removeItem('username');
+        sessionStorage.removeItem('loginTime');
+        
+        // Redirect to login page
+        window.location.href = 'login.html';
+    }
+});
 
 // Update Dashboard Statistics
 function updateDashboard() {
@@ -529,7 +555,12 @@ document.querySelectorAll('.nav-item').forEach(item => {
 // Menu Toggle
 document.getElementById('menuToggle').addEventListener('click', function() {
     const sidebar = document.getElementById('sidebar');
-    sidebar.classList.toggle('open');
+    sidebar.classList.toggle('collapsed');
+    
+    // On mobile, also toggle 'open' class
+    if (window.innerWidth <= 768) {
+        sidebar.classList.toggle('open');
+    }
 });
 
 // Page Search Functionality
@@ -829,8 +860,13 @@ document.getElementById('addNewBtn').addEventListener('click', function() {
 // Logout
 document.getElementById('logoutBtn').addEventListener('click', function() {
     if (confirm('Are you sure you want to logout?')) {
-        alert('Logged out successfully!');
-        // Implement actual logout logic here
+        // Clear session
+        sessionStorage.removeItem('isLoggedIn');
+        sessionStorage.removeItem('username');
+        sessionStorage.removeItem('loginTime');
+        
+        // Redirect to login page
+        window.location.href = 'login.html';
     }
 });
 

@@ -747,3 +747,9 @@ loadLanguageData();
 
 // Setup validation listeners
 setupValidationListeners();
+
+// Menu Toggle for Sidebar
+document.getElementById('menuToggle').addEventListener('click', function() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('collapsed');
+});
